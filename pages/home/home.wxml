@@ -1,0 +1,42 @@
+<!--pages/home/home.wxml-->
+<image class="bg" src="/pages/imgs/day.jpg" mode="scaleToFill"></image>
+<view class="content">
+  <view class="today">
+    <view class="today-top">
+      <view class="city">{{district}}</view>
+      <view class="street">{{street}}</view>
+      <view class="tmp">{{weather.now.tmp}}°</view>
+      <view class="now" decode="{{true}}">{{weather.now.cond_txt}}
+        |<text decode="{{true}}">&nbsp;&nbsp;</text>空气质量：良
+      </view>
+    </view>
+    <view class="today-bottom">
+      <view class="item">
+        <view class="tgwd">{{weather.now.wind_dir}}</view>
+        <view class="item-val">{{weather.now.wind_sc}}</view>
+      </view>
+      <view class="item">
+        <view class="tgwd">相对湿度</view>
+        <view class="item-val">{{weather.now.hum}}</view>
+      </view>
+      <view class="item">
+        <view class="tgwd">体感温度</view>
+        <view class="item-val">20</view>
+      </view>
+    </view>
+  </view>
+  <view class="forecasts">
+    <block wx:for="{{weather.daily_forecast}}">
+      <view class="cast-item">
+        <view class="cast-weekday" wx:if="{{index==0}}">今天</view>
+        <view class="cast-weekday" wx:elif="{{index==1}}">明天</view>
+        <view class="cast-weekday" wx:else>{{weekday[day]}}</view>
+        <view class="cast-type">
+          <image class="cast-icon" src="/pages/icons/{{item.cond_code_d}}.png"></image>
+          {{item.cond_txt_d}} | 良
+        </view>
+        <view class="cast-tmp">{{item.tmp_max}}°/{{item.tmp_min}}</view>
+      </view>
+    </block>
+  </view>
+</view>
